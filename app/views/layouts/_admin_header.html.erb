@@ -1,0 +1,12 @@
+<header>
+  <nav>
+    <ul>
+      <% if admin_signed_in? %>
+        <li><%= link_to 'Dashboard', admin_root_path %></li>
+        <li><%= link_to 'Logout', destroy_admin_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Admin Sign In', new_admin_session_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>

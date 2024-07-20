@@ -1,0 +1,4 @@
+<h1>Unsubscribe</h1>
+<p>Are you sure you want to unsubscribe?</p>
+<%= link_to 'Yes, Unsubscribe', withdraw_user_path(current_user), method: :patch %>
+<%= link_to 'No, Go Back', user_path(current_user) %>
