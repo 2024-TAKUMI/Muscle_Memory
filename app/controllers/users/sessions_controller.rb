@@ -11,7 +11,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     super do |resource|
-      flash[:notice] = "おかえりなさい#{resource.name}様"
+      flash[:notice] = "おかえりなさい　#{resource.name}様"
     end
   end
 end

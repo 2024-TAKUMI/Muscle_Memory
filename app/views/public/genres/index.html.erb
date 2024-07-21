@@ -1,0 +1,14 @@
+<h1>ジャンル一覧</h1>
+
+<div class="genres">
+  <% @parent_genres.each do |genre| %>
+    <div class="genre">
+      <h2><%= link_to genre.name, genre_path(genre) %></h2>
+      <ul>
+        <% genre.subgenres.each do |subgenre| %>
+          <li><%= link_to subgenre.name, subgenre_genre_path(subgenre) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

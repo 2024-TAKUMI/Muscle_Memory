@@ -3,6 +3,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = current_user
+    @posts = @user.posts
   end
 
   def edit
@@ -30,6 +31,11 @@ class Public::UsersController < ApplicationController
 
   private
 
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+  
   def user_params
     params.require(:user).permit(:name, :email, :profile_img, :self_introduction)
   end

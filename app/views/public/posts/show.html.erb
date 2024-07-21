@@ -1,0 +1,16 @@
+<h1><%= @post.title %></h1>
+  <p><%= @post.body %></p>
+  <p>ジャンル: <%= @post.genre.name %> / <%= @post.subgenre.name if @post.subgenre %></p>
+
+<% if @post.image.attached? %>
+  <div class="post-image">
+    <%= image_tag @post.image %>
+  </div>
+<% end %>
+
+<%= link_to '一覧に戻る', posts_path %>
+
+<% if @post.user == current_user %>
+  <%= link_to '編集', edit_post_path(@post) %>
+  <%= link_to '削除', @post, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+<% end %>
