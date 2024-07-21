@@ -1,23 +1,14 @@
-<h1>My page</h1>
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-<p>
-  <strong>Profile Image:</strong><br>
-  <% if @user.profile_img.present? %>
-    <%= image_tag @user.get_profile_image(100, 100) %>
-  <% else %>
-    No profile image uploaded
-  <% end %>
-</p>
-<p>
-  <strong>Self Introduction:</strong>
-  <%= @user.self_introduction %>
-</p>
-<%= link_to 'Edit', edit_public_user_path(@user) %>
-<%= link_to 'Unsubscribe', unsubscribe_public_user_path(@user) %>
+<h1><%= @user.name %>さんのページ</h1>
+
+<h2>投稿一覧</h2>
+
+<% if @user == current_user %>
+  <%= link_to '新規投稿', new_post_path, class: 'btn btn-primary' %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <h3><%= link_to post.title, post_path(post) %></h3>
+    <p><%= truncate(post.body, length: 100) %></p>
+  </div>
+<% end %>
