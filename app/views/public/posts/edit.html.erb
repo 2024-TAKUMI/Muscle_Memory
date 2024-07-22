@@ -22,6 +22,30 @@
     <%= form.text_area :body, value: @post.body %>
   </div>
 
+  <div class="field">
+    <%= form.label :genre_id, "ジャンル" %>
+    <%= form.collection_select :genre_id, @parent_genres, :id, :name, prompt: '選択してください', selected: @post.genre_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subgenre_id, "サブジャンル" %>
+    <%= form.collection_select :subgenre_id, @subgenres, :id, :name, prompt: '選択してください', selected: @post.subgenre_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+    <% if @post.image.attached? %>
+      <div>
+        <%= image_tag @post.image %>
+        <label>
+          <%= form.check_box :remove_image, value: '1' %>
+          画像を削除
+        </label>
+      </div>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit '更新' %>
   </div>

@@ -29,6 +29,12 @@
   cursor: pointer;
 }
 
-.btn:hover {
-  background-color: #0056b3;
-}
+.btn:hover { background-color: #0056b3; }
+
+.btn-secondary { background-color: #6c757d; }
+
+.btn-secondary:hover { background-color: #5a6268; }
+
+.btn-danger { background-color: #dc3545; }
+
+.btn-danger:hover { background-color: #c82333; }

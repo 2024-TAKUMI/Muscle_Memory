@@ -1,22 +1,30 @@
-<h1>Edit Profile</h1>
-<%= form_for @user, url: public_user_path(@user), html: { method: :patch } do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :profile_img, "Profile Image URL" %><br>
-    <%= f.text_field :profile_img %>
-    <% if @user.profile_img.present? %>
-      <%= image_tag @user.get_profile_image(100, 100) %>
-    <% end %>
-  </p>
-  <p>
-    <%= f.label :self_introduction, "Self Introduction" %><br>
-    <%= f.text_area :self_introduction %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+<h1>プロフィール編集</h1>
+
+<%= form_with(model: @user, local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "エラー") %>が発生しました:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '更新' %>
+  </div>
 <% end %>
-<%= link_to 'Back', public_user_path(@user) %>
+
+<%= link_to '戻る', user_path(@user) %>
