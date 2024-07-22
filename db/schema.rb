@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_21_082958) do
+ActiveRecord::Schema.define(version: 2024_07_22_161340) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2024_07_21_082958) do
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "postcomments", force: :cascade do |t|
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 2024_07_21_082958) do
     t.integer "post_image_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -89,6 +91,7 @@ ActiveRecord::Schema.define(version: 2024_07_21_082958) do
     t.integer "user_id", null: false
     t.integer "genre_id", null: false
     t.integer "subgenre_id"
+    t.boolean "remove_image", default: false
     t.index ["genre_id"], name: "index_posts_on_genre_id"
     t.index ["subgenre_id"], name: "index_posts_on_subgenre_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -106,6 +109,7 @@ ActiveRecord::Schema.define(version: 2024_07_21_082958) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -116,4 +120,5 @@ ActiveRecord::Schema.define(version: 2024_07_21_082958) do
   add_foreign_key "posts", "genres"
   add_foreign_key "posts", "genres", column: "subgenre_id"
   add_foreign_key "posts", "users"
+  add_foreign_key "posts", "users", on_delete: :cascade
 end

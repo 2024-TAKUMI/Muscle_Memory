@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # Devise routes for users and admins
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -8,26 +8,23 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
-  # Public
+  # ユーザー
   root to: 'public/homes#top'
   get '/about', to: 'public/homes#about'
 
-  # Posts
+  # 投稿関連
   scope module: :public do
-    resources :posts do
-      collection do
-        get 'subgenres', to: 'posts#subgenres'
-      end
-    end
+    resources :posts
     resources :genres, only: [:index, :show] do
       member do
         get 'subgenre', to: 'genres#subgenre'
       end
     end
-    resources :users, only: [:show]
+    resources :users, only: [:show, :edit, :update, :destroy]
+    get 'search', to: 'posts#search', as: :search_posts
   end
 
-  # Admin routes
+  # 管理者
   namespace :admin do
     get '/', to: 'homes#top', as: :root
   end

@@ -1,42 +1,46 @@
-class Public::UsersController < ApplicationController
-  before_action :authenticate_user!
+module Public
+  class UsersController < ApplicationController
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
+    before_action :correct_user, only: [:edit, :update, :destroy]
 
-  def show
-    @user = current_user
-    @posts = @user.posts
-  end
-
-  def edit
-    @user = current_user
-  end
-
-  def update
-    @user = current_user
-    if @user.update(user_params)
-      redirect_to public_user_path(@user), notice: 'Profile updated successfully.'
-    else
-      render :edit
+    def show
+      @posts = @user.posts
     end
-  end
 
-  def unsubscribe
-    # @user = User.find_by(name: params[:name])
-  end
+    def edit
+    end
 
-  def withdraw
-    current_user.update(is_active: false)
-    reset_session
-    redirect_to root_path
-  end
+    def update
+      if @user.update(user_params)
+        flash[:notice] = "ユーザー情報が更新されました。"
+        redirect_to user_path(@user)
+      else
+        render :edit
+      end
+    end
 
-  private
+    def destroy
+      @user.destroy
+      flash[:notice] = "アカウントが削除されました。"
+      redirect_to new_user_registration_path
+    end
 
+    private
 
-  def set_user
-    @user = User.find(params[:id])
-  end
-  
-  def user_params
-    params.require(:user).permit(:name, :email, :profile_img, :self_introduction)
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:name, :email)
+    end
+
+    def correct_user
+      unless @user == current_user
+        flash[:alert] = "他のユーザーの情報を編集・削除することはできません。"
+        redirect_to root_path
+      end
+    end
   end
 end
