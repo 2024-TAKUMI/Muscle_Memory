@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      post: "投稿"
+    attributes:
+      post:
+        title: "タイトル"
+        body: "本文"
+    errors:
+      models:
+        post:
+          attributes:
+            title:
+              blank: "タイトルを入力してください"
+            body:
+              blank: "本文を入力してください"

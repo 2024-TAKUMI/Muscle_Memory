@@ -1,0 +1,54 @@
+<h1>投稿編集</h1>
+
+<%= form_with(model: @post, local: true) do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "エラー") %>が発生しました:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, value: @post.title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body, value: @post.body %>
+  </div>
+
+  <div class="field">
+    <%= form.label :genre_id, "ジャンル" %>
+    <%= form.collection_select :genre_id, @parent_genres, :id, :name, prompt: '選択してください', selected: @post.genre_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subgenre_id, "サブジャンル" %>
+    <%= form.collection_select :subgenre_id, @subgenres, :id, :name, prompt: '選択してください', selected: @post.subgenre_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+    <% if @post.image.attached? %>
+      <div>
+        <%= image_tag @post.image %>
+        <label>
+          <%= form.check_box :remove_image, value: '1' %>
+          画像を削除
+        </label>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '更新' %>
+  </div>
+<% end %>
+
+<%= link_to '一覧に戻る', posts_path %>

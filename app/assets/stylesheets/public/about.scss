@@ -1,0 +1,57 @@
+#overview {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+#team {
+  padding: 20px;
+  background-color: #fff;
+  
+  .team-member {
+    margin-bottom: 20px;
+    
+    img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+#support {
+  padding: 20px;
+  background-color: #f9f9f9;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    
+    label {
+      margin-top: 10px;
+    }
+    
+    input, textarea {
+      margin-top: 5px;
+    }
+  }
+}
+
+footer {
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+    
+    li {
+      list-style: none;
+      
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+}
