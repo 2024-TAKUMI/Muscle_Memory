@@ -65,3 +65,15 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+
+
+# gem 'pry-byebug'、gem 'pry-rails'を記述している方は以下のようにして、再度bundle install
+# EC2インスタンス起動時にエラーになってしまいます。
+# group :development, :test do
+#   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+#   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  
+#   # ここに移動
+#   gem 'pry-byebug'
+#   gem 'pry-rails'
+# end
