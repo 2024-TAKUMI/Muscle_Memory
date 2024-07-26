@@ -47,7 +47,10 @@
   </div>
 
   <div class="actions">
-    <%= form.submit '更新' %>
+    <%= form.submit '更新する' %>
+  </div>
+  <div class="actions">
+    <%= link_to '削除', @post, method: :delete, data: { confirm: '本当に削除しますか？' } %>
   </div>
 <% end %>
 

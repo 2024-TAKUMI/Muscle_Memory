@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :encrypted_password, null: false, default: "" # パスワード
       
       t.string :name, null: false, default: "" # ユーザーネーム
-      t.text :profile_img, null: false, default: "" # プロフィール画像
+      t.text :profile_img, null: false # プロフィール画像
       t.string :self_introduction, null: false, default: "" # 自己紹介
       t.boolean :is_active, null: false, default: "TRUE" # 有効会員フラグ
 

@@ -1,16 +1,35 @@
 ja:
   activerecord:
-    models:
-      post: "投稿"
-    attributes:
-      post:
-        title: "タイトル"
-        body: "本文"
     errors:
       models:
         post:
           attributes:
+            genre:
+              blank: ""
+            subgenre:
+              blank: "を選択してください"
             title:
-              blank: "タイトルを入力してください"
+              blank: "を入力してください"
             body:
-              blank: "本文を入力してください"
+              blank: "を入力してください"
+    models:
+      post: "投稿"
+    attributes:
+      post:
+        genre: "ジャンル"
+        subgenre: "サブジャンル"
+        title: "タイトル"
+        body: "本文"
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      blank: "を入力してください"
+  devise:
+    registrations:
+      signed_up: "アカウントが登録されました。"
+      updated: "アカウントが更新されました。"
+      update_needs_confirmation: "アカウントは更新されましたが、新しいメールアドレスの確認が必要です。確認リンクが記載されたメールを確認してください。"
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"
