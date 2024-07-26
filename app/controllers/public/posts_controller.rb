@@ -6,11 +6,10 @@ module Public
     before_action :set_genres, only: [:new, :edit, :create, :update]
 
     def index
-      @posts = current_user.posts
+      @posts = Post.all
     end
 
     def show
-      @post = Post.find(params[:id])
     end
 
     def new
@@ -52,12 +51,12 @@ module Public
 
     def search
       if params[:query].blank?
-        flash[:alert] = "検索内容を入力してください。"
+        flash[:alert] = "検索する内容を入力してください。"
         redirect_to root_path
       else
-        @query = params[:query]
-        @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@query}%", "%#{@query}%")
-        @genres = Genre.where('name LIKE ?', "%#{@query}%")
+        @keyword = params[:query]
+        @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@keyword}%", "%#{@keyword}%")
+        render :search
       end
     end
 
@@ -81,24 +80,6 @@ module Public
     def set_genres
       @parent_genres = Genre.where(parent_id: nil)
       @subgenres = Genre.where.not(parent_id: nil)
-    end
-
-    def search_posts(query)
-      terms = query.split('')
-      posts = Post.all
-      terms.each do |term|
-        posts = posts.where('title LIKE ? OR body LIKE ?', "%#{term}%", "%#{term}%")
-      end
-      posts
-    end
-
-    def search_genres(query)
-      terms = query.split('')
-      genres = Genre.all
-      terms.each do |term|
-        genres = genres.where('name LIKE ?', "%#{term}%")
-      end
-      genres
     end
   end
 end

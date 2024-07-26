@@ -1,6 +1,6 @@
 <h1><%= @post.title %></h1>
-  <p><%= @post.body %></p>
-  <p>ジャンル: <%= @post.genre.name %> / <%= @post.subgenre.name if @post.subgenre %></p>
+<p><%= @post.body %></p>
+<p>ジャンル: <%= @post.genre.name %> / <%= @post.subgenre&.name %></p>
 
 <% if @post.image.attached? %>
   <div class="post-image">

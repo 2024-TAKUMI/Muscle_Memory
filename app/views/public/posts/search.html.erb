@@ -1,6 +1,5 @@
-<h1>検索結果</h1>
+<h1><%= @keyword %> の検索結果</h1>
 
-<h2>投稿</h2>
 <% if @posts.any? %>
   <% @posts.each do |post| %>
     <div class="post">
@@ -12,13 +11,4 @@
   <p>該当する投稿が見つかりませんでした。</p>
 <% end %>
 
-<h2>ジャンル</h2>
-<% if @genres.any? %>
-  <% @genres.each do |genre| %>
-    <div class="genre">
-      <h3><%= link_to genre.name, genre_path(genre) %></h3>
-    </div>
-  <% end %>
-<% else %>
-  <p>該当するジャンルが見つかりませんでした。</p>
-<% end %>
+<%= link_to '一覧に戻る', posts_path %>
