@@ -1,13 +1,13 @@
 class Post < ApplicationRecord
-  
   validates :title, presence: true
   validates :body, presence: true
-  
+
   belongs_to :user
   belongs_to :genre
   belongs_to :subgenre, class_name: 'Genre', optional: true
   has_one_attached :image
-  
+  has_many :post_comments, dependent: :destroy
+
   validates :subgenre, presence: true
   validate :subgenre_combination
 

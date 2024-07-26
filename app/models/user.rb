@@ -6,9 +6,10 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, presence: true, on: :create
   validates :password_confirmation, presence: true, on: :create
+  validates :self_introduction, length: { maximum: 500 }
 
   has_many :posts
-  has_many :postcomments
+  has_many :post_comments
   has_many :likes
   
   has_one_attached :profile_img

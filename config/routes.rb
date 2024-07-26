@@ -13,14 +13,18 @@ Rails.application.routes.draw do
 
   # 投稿関連
   scope module: :public do
-    resources :posts
+    resources :posts do
+      resources :post_comments, only: [:create, :destroy]
+      collection do
+        get 'search'
+      end
+    end
     resources :genres, only: [:index, :show] do
       member do
         get 'subgenre', to: 'genres#subgenre'
       end
     end
     resources :users, only: [:show, :edit, :update, :destroy]
-    get 'search', to: 'posts#search', as: :search_posts
   end
 
   # 管理者

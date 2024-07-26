@@ -33,7 +33,7 @@ module Public
     end
 
     def user_params
-      params.require(:user).permit(:name, :profile_img)
+      params.require(:user).permit(:name, :profile_img, :self_introduction) # self_introductionを追加
     end
 
     def correct_user

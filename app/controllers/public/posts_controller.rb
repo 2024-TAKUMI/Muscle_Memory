@@ -6,11 +6,19 @@ module Public
     before_action :set_genres, only: [:new, :edit, :create, :update]
 
     def index
-      @posts = current_user.posts
+      if params[:query].present?
+        @search_query = params[:query]
+        session[:search_query] = @search_query
+        @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@search_query}%", "%#{@search_query}%")
+      else
+        session.delete(:search_query)
+        @posts = Post.all
+      end
     end
 
     def show
-      @post = Post.find(params[:id])
+      @search_query = session[:search_query]
+      session[:return_to] = request.referer if request.referer
     end
 
     def new
@@ -52,12 +60,13 @@ module Public
 
     def search
       if params[:query].blank?
-        flash[:alert] = "検索内容を入力してください。"
+        flash[:alert] = "検索する内容を入力してください。"
         redirect_to root_path
       else
-        @query = params[:query]
-        @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@query}%", "%#{@query}%")
-        @genres = Genre.where('name LIKE ?', "%#{@query}%")
+        @search_query = params[:query]
+        session[:search_query] = @search_query
+        @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@search_query}%", "%#{@search_query}%")
+        render :index
       end
     end
 
@@ -81,24 +90,6 @@ module Public
     def set_genres
       @parent_genres = Genre.where(parent_id: nil)
       @subgenres = Genre.where.not(parent_id: nil)
-    end
-
-    def search_posts(query)
-      terms = query.split('')
-      posts = Post.all
-      terms.each do |term|
-        posts = posts.where('title LIKE ? OR body LIKE ?', "%#{term}%", "%#{term}%")
-      end
-      posts
-    end
-
-    def search_genres(query)
-      terms = query.split('')
-      genres = Genre.all
-      terms.each do |term|
-        genres = genres.where('name LIKE ?', "%#{term}%")
-      end
-      genres
     end
   end
 end

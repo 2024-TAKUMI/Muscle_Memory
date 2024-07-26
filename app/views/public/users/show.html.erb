@@ -6,9 +6,14 @@
   <%= link_to 'アカウント削除', user_path(@user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
 <% end %>
 
-<!--プロフィール画像-->
+<!-- プロフィール画像 -->
 <div class="profile">
   <%= image_tag @user.get_profile_image, class: "profile-image" %>
+</div>
+
+<!-- 自己紹介 -->
+<div class="introduction">
+  <p><strong>自己紹介:</strong> <%= @user.self_introduction %></p>
 </div>
 
 <h2>投稿一覧</h2>
