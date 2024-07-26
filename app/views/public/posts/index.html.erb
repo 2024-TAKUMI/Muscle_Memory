@@ -1,8 +1,7 @@
 <h1>投稿一覧</h1>
-
 <% @posts.each do |post| %>
   <div class="post">
-    <h2><%= link_to post.title, post_path(post) %></h2>
+    <h2><%= link_to post.title, post_path(post, query: @search_query) %></h2>
     <p><%= truncate(post.body, length: 100) %></p>
   </div>
 <% end %>

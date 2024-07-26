@@ -6,10 +6,19 @@ module Public
     before_action :set_genres, only: [:new, :edit, :create, :update]
 
     def index
-      @posts = Post.all
+      if params[:query].present?
+        @search_query = params[:query]
+        session[:search_query] = @search_query
+        @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@search_query}%", "%#{@search_query}%")
+      else
+        session.delete(:search_query)
+        @posts = Post.all
+      end
     end
 
     def show
+      @search_query = session[:search_query]
+      session[:return_to] = request.referer if request.referer
     end
 
     def new
@@ -54,9 +63,10 @@ module Public
         flash[:alert] = "検索する内容を入力してください。"
         redirect_to root_path
       else
-        @keyword = params[:query]
-        @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@keyword}%", "%#{@keyword}%")
-        render :search
+        @search_query = params[:query]
+        session[:search_query] = @search_query
+        @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@search_query}%", "%#{@search_query}%")
+        render :index
       end
     end
 

@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   belongs_to :genre
   belongs_to :subgenre, class_name: 'Genre', optional: true
   has_one_attached :image
+  has_many :post_comments, dependent: :destroy
 
   validates :subgenre, presence: true
   validate :subgenre_combination

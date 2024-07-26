@@ -8,9 +8,29 @@
   </div>
 <% end %>
 
-<%= link_to '一覧に戻る', posts_path %>
-
 <% if @post.user == current_user %>
-  <%= link_to '編集', edit_post_path(@post) %>
-  <%= link_to '削除', @post, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+  <%= link_to '編集する', edit_post_path(@post) %>
+  <%= link_to '削除する', @post, method: :delete, data: { confirm: '本当に削除しますか？' } %>
 <% end %>
+
+<h3>コメント</h3>
+<% @post.post_comments.each do |comment| %>
+  <p><strong><%= comment.user.name %>:</strong> <%= comment.content %></p>
+  <% if comment.user == current_user %>
+    <%= link_to '削除する', post_post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+  <% end %>
+<% end %>
+
+<% unless @post.user == current_user %>
+  <%= form_with(model: [ @post, @post.post_comments.build ], local: true) do |f| %>
+    <p>
+      <%= f.label :content, "コメントする" %><br>
+      <%= f.text_area :content %>
+    </p>
+    <p>
+      <%= f.submit "コメントを投稿する" %>
+    </p>
+  <% end %>
+<% end %>
+
+<%= link_to '一覧に戻る', session[:return_to] || posts_path %>
