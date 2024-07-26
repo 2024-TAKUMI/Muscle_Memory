@@ -1,2 +1,16 @@
 <h1>Welcome to Muscle Memory</h1>
 <p>This is the top page of my portfolio.</p>
+
+<h2>ピックアップ記事</h2>
+<ul>
+  <% @recommended_posts.each do |post| %>
+    <li><%= link_to post.title, post_path(post) %></li>
+  <% end %>
+</ul>
+
+<h2>ピックアップユーザー</h2>
+<ul>
+  <% @recommended_users.each do |user| %>
+    <li><%= link_to user.name, user_path(user) %></li>
+  <% end %>
+</ul>

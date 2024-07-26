@@ -19,6 +19,7 @@ module Public
     def show
       @search_query = session[:search_query]
       session[:return_to] = request.referer if request.referer
+      @post.increment!(:views_count)  # 閲覧数をカウントアップ
     end
 
     def new
@@ -61,7 +62,7 @@ module Public
     def search
       if params[:query].blank?
         flash[:alert] = "検索する内容を入力してください。"
-        redirect_to root_path
+        redirect_back(fallback_location: root_path)
       else
         @search_query = params[:query]
         session[:search_query] = @search_query

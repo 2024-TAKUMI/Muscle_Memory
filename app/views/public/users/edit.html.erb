@@ -3,7 +3,7 @@
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %>件のエラーがあります。</h2>
 
       <ul>
       <% @user.errors.full_messages.each do |message| %>
@@ -14,12 +14,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, "名前" %><br>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :profile_img %><br>
+    <%= f.label :profile_img, "プロフィール画像" %><br>
     <%= f.file_field :profile_img %>
     <% if @user.profile_img.attached? %>
       <%= image_tag @user.profile_img, class: "profile-image" %>
@@ -27,7 +27,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :self_introduction %><br>
+    <%= f.label :self_introduction, "自己紹介" %><br>
     <%= f.text_area :self_introduction %>
   </div>
 

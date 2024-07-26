@@ -10,6 +10,7 @@ module Public
         @post_comment = @post.post_comments.new(post_comment_params)
         @post_comment.user = current_user
         if @post_comment.save
+          @post.increment!(:comments_count)  # コメント数をカウントアップ
           redirect_to @post, notice: 'コメントが投稿されました。'
         else
           redirect_to @post, alert: 'コメントの投稿に失敗しました。'
