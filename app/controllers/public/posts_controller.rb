@@ -19,6 +19,7 @@ module Public
     def show
       @search_query = session[:search_query]
       session[:return_to] = request.referer if request.referer
+      @post.increment!(:views_count)  # 閲覧数をカウントアップ
     end
 
     def new

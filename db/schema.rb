@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_26_093811) do
+ActiveRecord::Schema.define(version: 2024_07_26_144205) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 2024_07_26_093811) do
     t.integer "genre_id", null: false
     t.integer "subgenre_id"
     t.boolean "remove_image", default: false
+    t.integer "views_count"
+    t.integer "comments_count"
     t.index ["genre_id"], name: "index_posts_on_genre_id"
     t.index ["subgenre_id"], name: "index_posts_on_subgenre_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
