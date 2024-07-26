@@ -1,23 +1,23 @@
 class Post < ApplicationRecord
+  
+  validates :title, presence: true
+  validates :body, presence: true
+  
   belongs_to :user
   belongs_to :genre
   belongs_to :subgenre, class_name: 'Genre', optional: true
   has_one_attached :image
-
-  validates :title, presence: true
-  validates :body, presence: true
-  validates :genre, presence: true
+  
   validates :subgenre, presence: true
   validate :subgenre_combination
 
   def subgenre_combination
     if genre.nil? || subgenre.nil?
-      errors.add(:base, "ジャンルとサブジャンルを選択してください。")
       return
     end
 
     invalid_combinations = {
-      "上半身" => ["太もも", "ふくらはぎ","お尻"],
+      "上半身" => ["太もも", "ふくらはぎ", "お尻"],
       "下半身" => ["肩", "胸", "背中", "お腹", "腕"]
     }
 

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    sessions: 'public/sessions',
+    registrations: 'public/registrations'
   }
   devise_for :admin, controllers: {
     sessions: 'admin/sessions'
@@ -27,5 +26,11 @@ Rails.application.routes.draw do
   # 管理者
   namespace :admin do
     get '/', to: 'homes#top', as: :root
+  end
+
+  # メールアドレスとパスワードの変更用ルーティングを追加
+  devise_scope :user do
+    get 'users/edit_email_password', to: 'public/registrations#edit_email_password', as: 'edit_email_password'
+    patch 'users/update_email_password', to: 'public/registrations#update_email_password', as: 'update_email_password'
   end
 end

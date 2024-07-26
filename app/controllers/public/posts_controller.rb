@@ -6,10 +6,11 @@ module Public
     before_action :set_genres, only: [:new, :edit, :create, :update]
 
     def index
-      @posts = Post.all
+      @posts = current_user.posts
     end
 
     def show
+      @post = Post.find(params[:id])
     end
 
     def new

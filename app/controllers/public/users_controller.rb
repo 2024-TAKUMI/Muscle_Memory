@@ -33,13 +33,13 @@ module Public
     end
 
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :profile_img)
     end
 
     def correct_user
       unless @user == current_user
         flash[:alert] = "他のユーザーの情報を編集・削除することはできません。"
-        redirect_to root_path
+        redirect_to user_path(current_user) # ログインユーザーのマイページに遷移
       end
     end
   end
