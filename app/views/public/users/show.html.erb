@@ -16,10 +16,10 @@
   <p><strong>自己紹介:</strong> <%= @user.self_introduction %></p>
 </div>
 
-<h2>投稿一覧</h2>
+<h5>投稿一覧</h5>
 <% @posts.each do |post| %>
   <div class="post">
-    <h3><%= link_to post.title, post_path(post) %></h3>
+    <h4><%= link_to post.title, post_path(post) %></h4>
     <p><%= truncate(post.body, length: 100) %></p>
   </div>
 <% end %>

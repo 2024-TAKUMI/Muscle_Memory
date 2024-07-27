@@ -8,6 +8,20 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+// Bootstrapのインポート
+import 'bootstrap'
+import '../stylesheets/application'
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+// 「戻る」ボタンの機能を追加
+document.addEventListener('turbolinks:load', () => {
+  const backButton = document.querySelectorAll('.back-button');
+  backButton.forEach(button => {
+    button.addEventListener('click', () => {
+      window.history.back();
+    });
+  });
+});

@@ -1,5 +1,3 @@
-<h1>新規投稿</h1>
-
 <%= form_with(model: @post, local: true) do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
@@ -12,24 +10,24 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control', value: @post.title %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%= form.text_area :body, class: 'form-control', value: @post.body %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :genre_id, "ジャンル" %>
-    <%= form.collection_select :genre_id, @parent_genres, :id, :name, prompt: '選択してください' %>
+    <%= form.collection_select :genre_id, @parent_genres, :id, :name, prompt: '選択してください', selected: @post.genre_id, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :subgenre_id, "サブジャンル" %>
-    <%= form.collection_select :subgenre_id, @subgenres, :id, :name, prompt: '選択してください' %>
+    <%= form.collection_select :subgenre_id, @subgenres, :id, :name, prompt: '選択してください', selected: @post.subgenre_id, class: 'form-control' %>
   </div>
 
   <div class="field">
@@ -38,8 +36,8 @@
   </div>
 
   <div class="actions">
-    <%= form.submit '投稿する' %>
+    <%= form.submit '新規投稿する', class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<%= link_to '一覧に戻る', posts_path %>
+<button class="btn btn-secondary back-button">戻る</button>

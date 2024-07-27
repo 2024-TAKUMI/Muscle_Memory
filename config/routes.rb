@@ -3,15 +3,14 @@ Rails.application.routes.draw do
     sessions: 'public/sessions',
     registrations: 'public/registrations'
   }
-  devise_for :admin, controllers: {
+  devise_for :admins, controllers: {
     sessions: 'admin/sessions'
   }
 
-  # ユーザー
+  # ユーザー側
   root to: 'public/homes#top'
   get '/about', to: 'public/homes#about'
 
-  # 投稿関連
   scope module: :public do
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
@@ -27,14 +26,27 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update, :destroy]
   end
 
-  # 管理者
+  # ジャンル用のルート
+  get 'upper_body', to: 'public/posts#upper_body'
+  get 'lower_body', to: 'public/posts#lower_body'
+
+  # 管理者側
   namespace :admin do
-    get '/', to: 'homes#top', as: :root
+    root to: 'homes#top'
+    resources :users, only: [:index, :show, :destroy]
+    resources :genres, only: [:index, :create, :destroy]
+    resources :posts, only: [:destroy]
+    resources :comments, only: [:destroy]
   end
 
-  # メールアドレスとパスワードの変更用ルーティングを追加
+  # メールアドレスとパスワードの変更用ルーティング
   devise_scope :user do
     get 'users/edit_email_password', to: 'public/registrations#edit_email_password', as: 'edit_email_password'
     patch 'users/update_email_password', to: 'public/registrations#update_email_password', as: 'update_email_password'
+  end
+
+  # 管理者のログアウトをDELETEメソッドで処理
+  devise_scope :admin do
+    delete 'admins/sign_out', to: 'devise/sessions#destroy', as: :destroy_admin_session
   end
 end

@@ -1,26 +1,43 @@
-<header>
-  <nav>
-    <ul>
-      <li><%= link_to 'Top', root_path %></li>
-      <li><%= link_to 'About', about_path %></li>
-      <li><%= link_to 'ジャンル', genres_path %></li>
-      <% if user_signed_in? %>
-        <li><%= link_to '新規投稿', new_post_path %></li>
-        <li><%= link_to 'マイページ', user_path(current_user) %></li>
-        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to '新規登録', new_user_registration_path %></li>
-        <li><%= link_to 'ログイン', new_user_session_path %></li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">Muscle Memory</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to 'About', about_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'ジャンル', genres_path, class: 'nav-link' %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to '新規投稿', new_post_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'マイページ', user_path(current_user), class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to '新規登録', new_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+      <%= form_with(url: search_posts_path, method: :get, local: true, class: 'form-inline ml-auto') do %>
+        <div class="input-group">
+          <%= text_field_tag :query, params[:query], class: "form-control search-input", placeholder: "サイト内検索" %>
+          <div class="input-group-append">
+          </div>
+        </div>
       <% end %>
-    </ul>
-  </nav>
-  <%= form_with(url: search_posts_path, method: :get, local: true) do %>
-    <div class="field">
-      <%= label_tag :query, "検索" %>
-      <%= text_field_tag :query, params[:query] %>
     </div>
-    <div class="actions">
-      <%= submit_tag "検索する" %>
-    </div>
-  <% end %>
-</header>
+  </div>
+</nav>

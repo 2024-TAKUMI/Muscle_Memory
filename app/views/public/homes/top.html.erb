@@ -1,16 +1,40 @@
-<h1>Welcome to Muscle Memory</h1>
-<p>This is the top page of my portfolio.</p>
-
-<h2>ピックアップ記事</h2>
-<ul>
-  <% @recommended_posts.each do |post| %>
-    <li><%= link_to post.title, post_path(post) %></li>
-  <% end %>
-</ul>
-
-<h2>ピックアップユーザー</h2>
-<ul>
-  <% @recommended_users.each do |user| %>
-    <li><%= link_to user.name, user_path(user) %></li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <!-- サイドバー -->
+    <div class="col-md-4">
+      <h5>ジャンル</h5>
+      <ul class="list-group">
+        <li class="list-group-item"><%= link_to '上半身', upper_body_path %></li>
+        <li class="list-group-item"><%= link_to '下半身', lower_body_path %></li>
+      </ul>
+      <p></p>
+      <h5>ピックアップ記事</h5>
+      <ul class="list-group">
+        <% @recommended_posts.each do |post| %>
+          <li class="list-group-item"><%= link_to post.title, post_path(post) %></li>
+        <% end %>
+      </ul>
+      <p></p>
+      <h5>ピックアップユーザー</h5>
+      <ul class="list-group">
+        <% @recommended_users.each do |user| %>
+          <li class="list-group-item"><%= link_to user.name, user_path(user) %></li>
+        <% end %>
+      </ul>
+    </div>
+    <!-- メインバー -->
+    <div class="col-md-8">
+      <h2>最新記事一覧</h2>
+      <% @latest_posts.each do |post| %>
+        <div class="card mb-3">
+          <%= image_tag url_for(post.image), class: "card-img-top img-thumbnail", alt: post.title if post.image.attached? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+            <p class="card-text"><%= post.body.truncate(100) %></p>
+            <p class="card-text"><small class="text-muted"><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></small></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

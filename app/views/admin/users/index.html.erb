@@ -1,0 +1,22 @@
+<h3>ユーザー一覧</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>メールアドレス</th>
+      <th>詳細</th>
+      <th>削除する</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to '詳細', admin_user_path(user), class: 'btn btn-info' %></td>
+        <td><%= link_to '削除する', admin_user_path(user), method: :delete, data: { confirm: '本当に退会させますか？' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<button class="btn btn-secondary back-button mt-4">戻る</button>

@@ -1,2 +1,8 @@
-<h1>管理者トップページ</h1>
-<p>ようこそ、管理者さん。</p>
+<div class="jumbotron">
+  <h1 class="display-4">管理者トップページ</h1>
+  <p class="lead">ようこそ、管理者さん。ここから管理者用の各種管理機能にアクセスできます。</p>
+  <hr class="my-4">
+  <p>管理者機能を選択してください。</p>
+  <a class="btn btn-primary btn-lg" href="<%= admin_users_path %>" role="button">ユーザー管理</a>
+  <a class="btn btn-secondary btn-lg" href="<%= admin_genres_path %>" role="button">ジャンル設定</a>
+</div>
