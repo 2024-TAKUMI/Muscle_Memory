@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :self_introduction, length: { maximum: 500 }
 
   has_many :posts
-  has_many :post_comments
+  has_many :post_comments, dependent: :destroy
   has_many :likes
   
   has_one_attached :profile_img
