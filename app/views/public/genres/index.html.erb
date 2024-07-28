@@ -1,22 +1,31 @@
-<h1>ジャンル一覧</h1>
-
-<div class="genres">
-  <div class="genre">
-    <h2><%= link_to '上半身', upper_body_path %></h2>
-    <ul>
-      <li><%= link_to '肩', upper_body_path %></li>
-      <li><%= link_to '胸', upper_body_path %></li>
-      <li><%= link_to '背中', upper_body_path %></li>
-      <li><%= link_to 'お腹', upper_body_path %></li>
-      <li><%= link_to '腕', upper_body_path %></li>
-    </ul>
-  </div>
-  <div class="genre">
-    <h2><%= link_to '下半身', lower_body_path %></h2>
-    <ul>
-      <li><%= link_to '太もも', lower_body_path %></li>
-      <li><%= link_to 'ふくらはぎ', lower_body_path %></li>
-      <li><%= link_to 'お尻', lower_body_path %></li>
-    </ul>
+<div class="container mt-5">
+  <h1 class="mb-4">ジャンル一覧</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to '上半身', upper_body_path %></h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= link_to '肩', upper_body_path %></li>
+            <li class="list-group-item"><%= link_to '胸', upper_body_path %></li>
+            <li class="list-group-item"><%= link_to '背中', upper_body_path %></li>
+            <li class="list-group-item"><%= link_to 'お腹', upper_body_path %></li>
+            <li class="list-group-item"><%= link_to '腕', upper_body_path %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to '下半身', lower_body_path %></h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= link_to '太もも', lower_body_path %></li>
+            <li class="list-group-item"><%= link_to 'ふくらはぎ', lower_body_path %></li>
+            <li class="list-group-item"><%= link_to 'お尻', lower_body_path %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

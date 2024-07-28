@@ -11,8 +11,12 @@ class User < ApplicationRecord
   has_many :posts
   has_many :post_comments, dependent: :destroy
   has_many :likes
+  has_many :groups, dependent: :destroy
+  has_many :messages, dependent: :destroy
   
   has_one_attached :profile_img
+
+  has_and_belongs_to_many :joined_groups, class_name: 'Group', join_table: 'groups_users'
 
   def get_profile_image
     if profile_img.attached?

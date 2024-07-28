@@ -1,5 +1,5 @@
 class Public::HomesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:top, :about]
+  # skip_before_action :authenticate_user!, only: [:top, :about]
 
   def top
     @recommended_posts = Post.order(views_count: :desc, comments_count: :desc).limit(5)

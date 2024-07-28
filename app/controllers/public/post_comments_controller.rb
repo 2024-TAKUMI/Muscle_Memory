@@ -1,6 +1,6 @@
 module Public
   class PostCommentsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user! # ログインしていないユーザーは弾く
     before_action :set_post
 
     def create
