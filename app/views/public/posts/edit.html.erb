@@ -12,34 +12,34 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title, value: @post.title %>
+    <%= form.text_field :title, class: 'form-control', value: @post.title %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :body %>
-    <%= form.text_area :body, value: @post.body %>
+    <%= form.text_area :body, class: 'form-control', value: @post.body %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :genre_id, "ジャンル" %>
-    <%= form.collection_select :genre_id, @parent_genres, :id, :name, prompt: '選択してください', selected: @post.genre_id %>
+    <%= form.collection_select :genre_id, @parent_genres, :id, :name, prompt: '選択してください', selected: @post.genre_id, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :subgenre_id, "サブジャンル" %>
-    <%= form.collection_select :subgenre_id, @subgenres, :id, :name, prompt: '選択してください', selected: @post.subgenre_id %>
+    <%= form.collection_select :subgenre_id, @subgenres, :id, :name, prompt: '選択してください', selected: @post.subgenre_id, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :image %>
-    <%= form.file_field :image %>
+    <%= form.file_field :image, class: 'form-control' %>
     <% if @post.image.attached? %>
-      <div>
-        <%= image_tag @post.image %>
-        <label>
-          <%= form.check_box :remove_image, value: '1' %>
+      <div class="mt-2">
+        <%= image_tag @post.image, class: 'img-thumbnail' %>
+        <label class="form-check-label">
+          <%= form.check_box :remove_image, value: '1', class: 'form-check-input' %>
           画像を削除
         </label>
       </div>
@@ -47,11 +47,11 @@
   </div>
 
   <div class="actions">
-    <%= form.submit '更新する' %>
+    <%= form.submit '更新する', class: 'btn btn-primary' %>
   </div>
   <div class="actions">
-    <%= link_to '削除', @post, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    <%= link_to '削除', @post, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
   </div>
 <% end %>
 
-<%= link_to '一覧に戻る', posts_path %>
+<%= link_to '戻る', post_path(@post), class: 'btn btn-secondary back-button' %>

@@ -1,6 +1,6 @@
 module Public
   class PostsController < ApplicationController
-    before_action :authenticate_user!, except: [:index, :show, :search]
+    before_action :authenticate_user!, except: [:index, :show, :search, :upper_body, :lower_body]
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :correct_user, only: [:edit, :update, :destroy]
     before_action :set_genres, only: [:new, :edit, :create, :update]
@@ -69,6 +69,14 @@ module Public
         @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{@search_query}%", "%#{@search_query}%")
         render :index
       end
+    end
+
+    def upper_body
+      @posts = Post.where(genre_id: Genre.where(name: ['肩', '胸', '背中', 'お腹', '腕']).pluck(:id))
+    end
+
+    def lower_body
+      @posts = Post.where(genre_id: Genre.where(name: ['太もも', 'ふくらはぎ', 'お尻']).pluck(:id))
     end
 
     private

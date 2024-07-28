@@ -7,6 +7,7 @@ class Public::HomesController < ApplicationController
                              .group('users.id')
                              .order('SUM(posts.views_count) DESC', 'SUM(posts.comments_count) DESC')
                              .limit(5)
+    @latest_posts = Post.order(created_at: :desc).limit(10)
   end
 
   def about

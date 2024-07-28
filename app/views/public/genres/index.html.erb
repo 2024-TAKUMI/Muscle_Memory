@@ -1,14 +1,22 @@
 <h1>ジャンル一覧</h1>
 
 <div class="genres">
-  <% @parent_genres.each do |genre| %>
-    <div class="genre">
-      <h2><%= link_to genre.name, genre_path(genre) %></h2>
-      <ul>
-        <% genre.subgenres.each do |subgenre| %>
-          <li><%= link_to subgenre.name, subgenre_genre_path(subgenre) %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="genre">
+    <h2><%= link_to '上半身', upper_body_path %></h2>
+    <ul>
+      <li><%= link_to '肩', upper_body_path %></li>
+      <li><%= link_to '胸', upper_body_path %></li>
+      <li><%= link_to '背中', upper_body_path %></li>
+      <li><%= link_to 'お腹', upper_body_path %></li>
+      <li><%= link_to '腕', upper_body_path %></li>
+    </ul>
+  </div>
+  <div class="genre">
+    <h2><%= link_to '下半身', lower_body_path %></h2>
+    <ul>
+      <li><%= link_to '太もも', lower_body_path %></li>
+      <li><%= link_to 'ふくらはぎ', lower_body_path %></li>
+      <li><%= link_to 'お尻', lower_body_path %></li>
+    </ul>
+  </div>
 </div>
