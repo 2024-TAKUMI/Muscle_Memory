@@ -12,6 +12,9 @@
         <li class="nav-item">
           <%= link_to 'ジャンル', genres_path, class: 'nav-link' %>
         </li>
+        <li class="nav-item">
+          <%= link_to 'コミュニティ', groups_path, class: 'nav-link' %>
+        </li>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to '新規投稿', new_post_path, class: 'nav-link' %>

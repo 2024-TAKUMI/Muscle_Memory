@@ -72,11 +72,11 @@ module Public
     end
 
     def upper_body
-      @posts = Post.where(genre_id: Genre.where(name: ['肩', '胸', '背中', 'お腹', '腕']).pluck(:id))
+      @posts = Post.where(genre: ['肩', '胸', '背中', 'お腹', '腕'])
     end
 
     def lower_body
-      @posts = Post.where(genre_id: Genre.where(name: ['太もも', 'ふくらはぎ', 'お尻']).pluck(:id))
+      @posts = Post.where(genre: ['太もも', 'ふくらはぎ', 'お尻'])
     end
 
     private

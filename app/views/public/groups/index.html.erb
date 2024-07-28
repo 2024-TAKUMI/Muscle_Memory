@@ -1,0 +1,23 @@
+<h3>みんなの掲示板</h3>
+
+<p>このページでは、参加可能なグループを探しコミュニティに参加したり、新しいグループを作成することができます。</p>
+
+<div class="actions">
+  <%= link_to '新しいグループを作成', new_group_path, class: 'btn btn-primary' %>
+</div>
+
+<% if @groups.any? %>
+  <ul>
+    <% @groups.each do |group| %>
+      <li>
+        <h3><%= link_to group.name, group_path(group) %></h3>
+        <p><%= truncate(group.description, length: 100) %></p>
+        <p>作成者: <%= group.user.name %></p>
+        <p>メンバー数: <%= group.users.count %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>現在、参加可能なコミュニティはありません。</p>
+<% end %>
+

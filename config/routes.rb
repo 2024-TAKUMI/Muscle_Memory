@@ -24,8 +24,17 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: [:show, :edit, :update, :destroy]
+    
+    # グループのルーティング
+    resources :groups do
+      member do
+        post 'join'
+        post 'leave'
+      end
+      resources :messages, only: [:create]
+    end
   end
-
+  
   # ジャンル用のルート
   get 'upper_body', to: 'public/posts#upper_body'
   get 'lower_body', to: 'public/posts#lower_body'
@@ -39,6 +48,9 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :destroy]
     resources :posts, only: [:destroy]
     resources :comments, only: [:index, :destroy]
+    
+    # 管理者用グループ管理のルーティング
+    resources :groups, only: [:index, :destroy]
   end
 
   # メールアドレスとパスワードの変更用ルーティング

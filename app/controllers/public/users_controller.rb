@@ -1,6 +1,6 @@
 module Public
   class UsersController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user! # ログインしていないユーザーは弾く
     before_action :set_user, only: [:show, :edit, :update, :destroy]
     before_action :correct_user, only: [:edit, :update, :destroy]
 
