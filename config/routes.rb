@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: 'public/sessions',
     registrations: 'public/registrations'
   }
-  devise_for :admin, controllers: {
+  devise_for :admins, controllers: {
     sessions: 'admin/sessions'
   }
 
@@ -33,10 +33,12 @@ Rails.application.routes.draw do
   # 管理者側
   namespace :admin do
     root to: 'homes#top'
-    resources :users, only: [:index, :show, :destroy]
+    resources :users, only: [:index, :show, :destroy] do
+      resources :comments, only: [:destroy], module: :users
+    end
     resources :genres, only: [:index, :create, :destroy]
     resources :posts, only: [:destroy]
-    resources :comments, only: [:destroy]
+    resources :comments, only: [:index, :destroy]
   end
 
   # メールアドレスとパスワードの変更用ルーティング

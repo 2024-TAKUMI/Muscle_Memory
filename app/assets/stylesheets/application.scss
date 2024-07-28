@@ -120,3 +120,41 @@
   max-width: 300px;
   height: auto;
 }
+
+// 統合された戻るボタンのスタイル
+.btn-back {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-back:hover {
+  background-color: #5a6268;
+}
+
+// フラットボタン
+.btn-flat {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-flat:hover {
+  background-color: #27ae60;
+}
