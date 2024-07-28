@@ -59,8 +59,8 @@ gem 'devise'
 
 gem 'rails-i18n' # ja ロケールを認識するため導入
 
-gem 'bootstrap', '~> 5.0.0'
 gem 'jquery-rails'
+gem 'bootstrap', '~> 4.3.1'
 
 gem 'dotenv-rails'
 group :production do

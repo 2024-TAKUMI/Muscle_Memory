@@ -1,11 +1,15 @@
 module Public
   class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
     before_action :correct_user, only: [:edit, :update, :destroy]
 
     def show
-      @posts = @user.posts
+      if @user
+        @posts = @user.posts
+      else
+        redirect_to root_path, alert: "ユーザーが見つかりませんでした。"
+      end
     end
 
     def edit
@@ -29,17 +33,22 @@ module Public
     private
 
     def set_user
-      @user = User.find(params[:id])
+      if params[:id] != 'sign_out'
+        @user = User.find_by(id: params[:id])
+        unless @user
+          redirect_to root_path, alert: "ユーザーが見つかりませんでした。"
+        end
+      end
     end
 
     def user_params
-      params.require(:user).permit(:name, :profile_img, :self_introduction) # self_introductionを追加
+      params.require(:user).permit(:name, :profile_img, :self_introduction)
     end
 
     def correct_user
       unless @user == current_user
         flash[:alert] = "他のユーザーの情報を編集・削除することはできません。"
-        redirect_to user_path(current_user) # ログインユーザーのマイページに遷移
+        redirect_to user_path(current_user)
       end
     end
   end

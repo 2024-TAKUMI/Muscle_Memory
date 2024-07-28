@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: 'public/sessions',
     registrations: 'public/registrations'
   }
-  devise_for :admins, controllers: {
+  devise_for :admin, controllers: {
     sessions: 'admin/sessions'
   }
 
@@ -43,10 +43,5 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'users/edit_email_password', to: 'public/registrations#edit_email_password', as: 'edit_email_password'
     patch 'users/update_email_password', to: 'public/registrations#update_email_password', as: 'update_email_password'
-  end
-
-  # 管理者のログアウトをDELETEメソッドで処理
-  devise_scope :admin do
-    delete 'admins/sign_out', to: 'devise/sessions#destroy', as: :destroy_admin_session
   end
 end
