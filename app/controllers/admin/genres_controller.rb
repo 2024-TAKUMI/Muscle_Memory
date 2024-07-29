@@ -19,8 +19,12 @@ class Admin::GenresController < ApplicationController
 
   def destroy
     @genre = Genre.find(params[:id])
-    @genre.destroy
-    redirect_to admin_genres_path, notice: 'ジャンルを削除しました。'
+    if @genre.subgenres.any? || @genre.posts.any?
+      redirect_to admin_genres_path, alert: '記事が紐付けられています'
+    else
+      @genre.destroy
+      redirect_to admin_genres_path, notice: 'ジャンルを削除しました。'
+    end
   end
 
   private

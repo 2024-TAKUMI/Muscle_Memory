@@ -4,8 +4,7 @@ module Public
     before_action :set_group
 
     def create
-      @message = @group.messages.build(message_params)
-      @message.user = current_user
+      @message = current_user.messages.build(message_params)
       if @message.save
         redirect_to @group, notice: 'メッセージが送信されました。'
       else
@@ -20,7 +19,7 @@ module Public
     end
 
     def message_params
-      params.require(:message).permit(:content)
+      params.require(:message).permit(:body, :group_id)
     end
   end
 end

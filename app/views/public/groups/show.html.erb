@@ -19,9 +19,10 @@
 </div>
 
 <%= form_with(model: [@group, @message], local: true) do |form| %>
+  <%= form.hidden_field :group_id, value: @group.id %>
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
   </div>
   <div class="actions">
     <%= form.submit '送信' %>
