@@ -1,8 +1,50 @@
-<h1>投稿一覧</h1>
-
-<% @posts.each do |post| %>
-  <div class="post">
-    <h2><%= link_to post.title, post %></h2>
-    <p><%= truncate(post.body, length: 100) %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <h5>ジャンル一覧</h5>
+      <ul class="list-group">
+        <li class="list-group-item">
+          上半身
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to '肩', search_posts_path(query: '肩') %></li>
+            <li class="list-group-item"><%= link_to '胸', search_posts_path(query: '胸') %></li>
+            <li class="list-group-item"><%= link_to '背中', search_posts_path(query: '背中') %></li>
+            <li class="list-group-item"><%= link_to 'お腹', search_posts_path(query: 'お腹') %></li>
+            <li class="list-group-item"><%= link_to '腕', search_posts_path(query: '腕') %></li>
+          </ul>
+        </li>
+        <li class="list-group-item">
+          下半身
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to '太もも', search_posts_path(query: '太もも') %></li>
+            <li class="list-group-item"><%= link_to 'ふくらはぎ', search_posts_path(query: 'ふくらはぎ') %></li>
+            <li class="list-group-item"><%= link_to 'お尻', search_posts_path(query: 'お尻') %></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-8">
+      <% @posts.each do |post| %>
+        <div class="post card mb-5 p-3">
+          <div class="card-body d-flex align-items-center">
+            <%= link_to user_path(post.user), class: "mr-3" do %>
+              <% if post.user.profile_img.present? %>
+                <%= image_tag post.user.profile_img, alt: post.user.name, class: "rounded-circle", size: "60x60" %>
+              <% else %>
+                <%= image_tag "no_image.jpg", alt: "No image", class: "rounded-circle", size: "60x60" %>
+              <% end %>
+            <% end %>
+            <div class="ml-4 flex-grow-1">
+              <h2 class="card-title mb-1"><%= link_to post.title, post_path(post, query: @search_query) %></h2>
+              <p class="card-text mb-1"><%= truncate(post.body, length: 100) %></p>
+            </div>
+            <div class="ml-3 text-right">
+              <p class="card-text mb-1">閲覧数: <%= post.views_count %></p>
+              <p class="card-text mb-1">コメント数: <%= post.comments_count %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

@@ -12,6 +12,7 @@ end
   lower_body.subgenres.find_or_create_by!(name: subgenre_name)
 end
 
+# その他のジャンル
 genres = [
   { name: 'Action' },
   { name: 'Adventure' },
@@ -22,13 +23,13 @@ genres.each do |genre_data|
   Genre.find_or_create_by!(name: genre_data[:name])
 end
 
+# ユーザーの作成
 users = [
   { email: 'user1@example.com', password: 'password1', name: 'User One' },
   { email: 'user2@example.com', password: 'password2', name: 'User Two' },
   { email: 'user3@example.com', password: 'password3', name: 'User Three' }
 ]
 
-# find_or_create_by! で、既存データがあればそれを使用し、なければ新規作成するようにする。
 users.each do |user|
   User.find_or_create_by!(email: user[:email]) do |u|
     u.password = user[:password]

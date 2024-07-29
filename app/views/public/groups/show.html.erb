@@ -1,0 +1,29 @@
+<h1><%= @group.name %></h1>
+
+<% if @group.users.include?(current_user) %>
+  <%= form_with(url: leave_group_path(@group), method: :post, local: true) do %>
+    <div class="actions">
+      <%= submit_tag 'グループから退出', class: 'btn btn-danger' %>
+    </div>
+  <% end %>
+<% else %>
+  <%= form_with(url: join_group_path(@group), method: :post, local: true) do %>
+    <div class="actions">
+      <%= submit_tag 'グループに参加', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>
+
+<div id="messages">
+  <%= render @group.messages %>
+</div>
+
+<%= form_with(model: [@group, @message], local: true) do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= form.submit '送信' %>
+  </div>
+<% end %>

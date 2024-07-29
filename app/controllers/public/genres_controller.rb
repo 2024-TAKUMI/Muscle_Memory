@@ -1,5 +1,6 @@
 module Public
   class GenresController < ApplicationController
+
     def index
       @parent_genres = Genre.where(parent_id: nil)
     end

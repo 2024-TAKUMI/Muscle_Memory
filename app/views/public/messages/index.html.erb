@@ -1,0 +1,12 @@
+<h>メッセージ一覧</h3>
+<h5>受信したメッセージ</h5>
+<% @received_messages.each do |message| %>
+  <p><%= message.body %> - <%= message.sender.name %></p>
+<% end %>
+
+<h5>送信したメッセージ</h5>
+<% @sent_messages.each do |message| %>
+  <p><%= message.body %> - <%= message.receiver.name %></p>
+<% end %>
+
+<%= link_to '新しいメッセージを作成', new_message_path %>

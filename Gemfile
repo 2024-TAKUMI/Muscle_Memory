@@ -57,6 +57,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+gem 'rails-i18n' # ja ロケールを認識するため導入
+
+gem 'bootstrap', '~> 5.1.3'
+gem 'jquery-rails'
+gem 'sassc-rails'
+
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'

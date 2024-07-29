@@ -1,16 +1,35 @@
 <h1><%= @post.title %></h1>
-  <p><%= @post.body %></p>
-  <p>ジャンル: <%= @post.genre.name %> / <%= @post.subgenre.name if @post.subgenre %></p>
+<p><%= @post.body %></p>
+<p>ジャンル: <%= @post.genre.name %> / <%= @post.subgenre&.name %></p>
 
 <% if @post.image.attached? %>
   <div class="post-image">
-    <%= image_tag @post.image %>
+    <%= image_tag @post.image, class: 'img-thumbnail' %>
   </div>
 <% end %>
 
-<%= link_to '一覧に戻る', posts_path %>
-
 <% if @post.user == current_user %>
-  <%= link_to '編集', edit_post_path(@post) %>
-  <%= link_to '削除', @post, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+  <%= link_to '編集する', edit_post_path(@post), class: 'btn btn-primary' %>
+  <%= link_to '削除する', @post, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
 <% end %>
+
+<% @post.post_comments.each do |comment| %>
+  <p><strong><%= comment.user.name %>:</strong> <%= comment.content %></p>
+  <% if comment.user == current_user %>
+    <%= link_to '削除する', post_post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+  <% end %>
+<% end %>
+
+<% unless @post.user == current_user %>
+  <%= form_with(model: [ @post, @post.post_comments.build ], local: true) do |f| %>
+    <p>
+      <%= f.label :content, "コメントする" %><br>
+      <%= f.text_area :content, class: 'form-control' %>
+    </p>
+    <p>
+      <%= f.submit "コメントを投稿する", class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+<% end %>
+
+<%= link_to '戻る', 'javascript:history.back()', class: 'btn btn-flat' %>
