@@ -3,9 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
-  validates :email, presence: true
-  validates :password, presence: true, on: :create
-  validates :password_confirmation, presence: true, on: :create
+  #validates :email, presence: true
+  #validates :password, presence: true, on: :create
+  #validates :password_confirmation, presence: true, on: :create
   validates :self_introduction, length: { maximum: 500 }
 
   has_many :posts

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: 'public/sessions',
     registrations: 'public/registrations'
   }
-  devise_for :admins, controllers: {
+  devise_for :admins, skip: [:registerable, :recoverable], controllers: {
     sessions: 'admin/sessions'
   }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_28_162116) do
+ActiveRecord::Schema.define(version: 2024_07_28_155333) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,16 +67,6 @@ ActiveRecord::Schema.define(version: 2024_07_28_162116) do
     t.index ["parent_id"], name: "index_genres_on_parent_id"
   end
 
-  create_table "group_messages", force: :cascade do |t|
-    t.integer "group_id", null: false
-    t.integer "user_id", null: false
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_group_messages_on_group_id"
-    t.index ["user_id"], name: "index_group_messages_on_user_id"
-  end
-
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -94,7 +84,6 @@ ActiveRecord::Schema.define(version: 2024_07_28_162116) do
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -104,10 +93,7 @@ ActiveRecord::Schema.define(version: 2024_07_28_162116) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "group_id", null: false
-    t.text "content"
-    t.integer "user_id", null: false
     t.index ["group_id"], name: "index_messages_on_group_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -118,14 +104,6 @@ ActiveRecord::Schema.define(version: 2024_07_28_162116) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_post_comments_on_post_id"
     t.index ["user_id"], name: "index_post_comments_on_user_id"
-  end
-
-  create_table "postcomments", force: :cascade do |t|
-    t.text "comment", default: "", null: false
-    t.integer "post_image_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -150,7 +128,6 @@ ActiveRecord::Schema.define(version: 2024_07_28_162116) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name", default: "", null: false
-    t.text "profile_img", default: "", null: false
     t.string "self_introduction", default: "", null: false
     t.boolean "is_active", default: true, null: false
     t.string "reset_password_token"
@@ -158,7 +135,6 @@ ActiveRecord::Schema.define(version: 2024_07_28_162116) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -166,15 +142,11 @@ ActiveRecord::Schema.define(version: 2024_07_28_162116) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "genres", "genres", column: "parent_id"
-  add_foreign_key "group_messages", "groups"
-  add_foreign_key "group_messages", "users"
   add_foreign_key "groups", "users"
   add_foreign_key "messages", "groups"
-  add_foreign_key "messages", "users"
   add_foreign_key "post_comments", "posts"
   add_foreign_key "post_comments", "users"
   add_foreign_key "posts", "genres"
   add_foreign_key "posts", "genres", column: "subgenre_id"
   add_foreign_key "posts", "users"
-  add_foreign_key "posts", "users", on_delete: :cascade
 end
